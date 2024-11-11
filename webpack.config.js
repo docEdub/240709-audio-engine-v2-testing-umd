@@ -1,10 +1,10 @@
-const fs = require('fs');
+const fs = require("fs");
 const path = require("path");
 
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const appDirectory = fs.realpathSync(process.cwd());
 
@@ -12,25 +12,27 @@ module.exports = {
     entry: path.resolve(appDirectory, "src/app.ts"),
     output: {
         path: path.resolve(appDirectory, "dist"),
-        filename: 'js/app.js'
+        filename: "js/app.js",
     },
     resolve: {
-        extensions: [".tsx", ".ts", ".js"]
+        extensions: [".tsx", ".ts", ".js"],
     },
     devServer: {
-        host: '0.0.0.0',
-        port: 443,
-        static: path.resolve(appDirectory, "public"),
+        headers: {
+            // These are needed to get SharedArrayBuffer working, which is required for Whisper speech-to-text.
+            "Cross-Origin-Embedder-Policy": "require-corp",
+            "Cross-Origin-Opener-Policy": "same-origin",
+        },
+        host: "0.0.0.0",
         hot: false,
-        server: "https"
+        port: 443,
+        server: "https",
+        static: path.resolve(appDirectory, "public"),
     },
     devtool: "inline-source-map",
     externals: {
-        "babylonjs": "BABYLON"
+        babylonjs: "BABYLON",
     },
-    // infrastructureLogging: {
-	// 	level: 'log',
-	// },
     module: {
         rules: [
             {
@@ -42,23 +44,22 @@ module.exports = {
                 test: /\.js$/,
                 enforce: "pre",
                 use: ["source-map-loader"],
-            }
-        ]
+            },
+        ],
     },
     plugins: [
         new CopyWebpackPlugin({
             patterns: [
                 { from: "node_modules/babylon*/babylon*.js", to: "js/[name].js" },
                 { from: "node_modules/babylon*/babylon*.map", to: "js/[name].map" },
-                { from: path.resolve("public/js/dat.gui.0.6.2.min.js"), to: "js" },
                 path.resolve("public/favicon.png"),
-            ]
+            ],
         }),
         new HtmlWebpackPlugin({
             inject: true,
-            template: path.resolve(appDirectory, "public/index.html")
+            template: path.resolve(appDirectory, "public/index.html"),
         }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
     ],
-    mode: "development"
+    mode: "development",
 };

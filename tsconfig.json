@@ -5,21 +5,13 @@
         "moduleResolution": "node",
         "noImplicitAny": false,
         "noResolve": false,
-        "lib": [
-            "dom",
-            "es6"
-        ],
+        "lib": ["dom", "es6"],
         "preserveConstEnums": true,
-        "rootDir": "src",
+        "rootDir": ".",
         "sourceMap": true,
         "strict": true,
         "target": "es6",
-        "types": [
-            "babylonjs",
-            "babylonjs-gui"
-        ]
+        "types": ["babylonjs"]
     },
-    "exclude": [
-        "snippets"
-    ]
+    "exclude": ["snippets"]
 }
