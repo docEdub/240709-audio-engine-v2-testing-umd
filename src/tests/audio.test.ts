@@ -91,16 +91,6 @@ const evaluatePlaywrightAudioTests = async (engineType = "webaudio", testFileNam
         page.off("console", log);
     });
 
-    // test.describe("CreateAudioEngineAsync", () => {
-    //     test("returns a valid audio engine when called with no parameters", async () => {
-    //         const engine = await page.evaluate(async () => {
-    //             const engine = await BABYLON.CreateAudioEngineAsync({ audioContext: audioContext! });
-    //             return engine;
-    //         });
-    //         expect(engine).toBeTruthy();
-    //     });
-    // });
-
     test.setTimeout(0);
 
     test.describe("R+D", () => {
