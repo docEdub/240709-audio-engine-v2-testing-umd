@@ -10,7 +10,7 @@ export default defineConfig({
         {
             name: "audio",
             testDir: "./src/tests",
-            testMatch: "**/audio.test.ts",
+            testMatch: "**/*.test.ts",
 
             fullyParallel: true,
             retries: 0,
