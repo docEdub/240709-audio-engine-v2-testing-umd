@@ -1,5 +1,10 @@
 import { defineConfig } from "@playwright/test";
 
+import { populateEnvironment } from "./src/test-tools/utils";
+populateEnvironment();
+
+const args = process.env.PLAYWRIGHT_ARGS ? process.env.PLAYWRIGHT_ARGS.split(" ") : [];
+
 export default defineConfig({
     projects: [
         {
@@ -12,7 +17,7 @@ export default defineConfig({
             use: {
                 ignoreHTTPSErrors: true,
                 launchOptions: {
-                    args: ["--auto-open-devtools-for-tabs"],
+                    args,
                 },
             },
         },
