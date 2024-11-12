@@ -1,7 +1,7 @@
-/* eslint-disable no-console */
+import { expect, TestInfo } from "@playwright/test";
+import * as dotenv from "dotenv";
 import * as fs from "fs";
 import * as path from "path";
-import * as dotenv from "dotenv";
 
 export function populateEnvironment() {
     dotenv.config({ path: path.resolve(findRootDirectory(), "./.env") });

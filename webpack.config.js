@@ -9,10 +9,10 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const appDirectory = fs.realpathSync(process.cwd());
 
 module.exports = {
-    entry: path.resolve(appDirectory, "src/app.ts"),
+    entry: path.resolve(appDirectory, "src/test-tools/evaluatedAudioTestUtils.ts"),
     output: {
         path: path.resolve(appDirectory, "dist"),
-        filename: "js/app.js",
+        filename: "js/evaluatedAudioTestUtils.js",
     },
     resolve: {
         extensions: [".tsx", ".ts", ".js"],

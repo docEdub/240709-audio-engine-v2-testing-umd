@@ -2,8 +2,8 @@
 
 // prettier-ignore
 var Module = typeof Module != "undefined" ? Module : {
-    print: console.log,
-    printErr: console.log,
+    print: function (text) {}, //console.log,
+    printErr: function (text) {}, //console.log,
     setStatus: function (text) {},
     monitorRunDependencies: function (left) {},
 };
@@ -4350,7 +4350,7 @@ let instance = 0;
 // fetch a remote file from remote URL using the Fetch API
 async function fetchRemote(url) {
     const cbPrint = (msg) => {
-        console.log(msg);
+        // console.log(msg);
     };
 
     cbPrint("fetchRemote: downloading with fetch()...");
@@ -4429,22 +4429,22 @@ class Whisper {
 
         WhisperModule.FS_createDataFile("/", fname, buf, true, true);
 
-        console.log("loadRemote: stored model: " + fname + " size: " + buf.length);
+        // console.log("loadRemote: stored model: " + fname + " size: " + buf.length);
 
         if (!instance) {
             instance = WhisperModule.init(fname);
 
-            if (instance) {
-                console.log("js: whisper initialized, instance: " + instance);
-            }
+            // if (instance) {
+            //     console.log("js: whisper initialized, instance: " + instance);
+            // }
         }
     }
 
     transcribe(audio) {
-        return WhisperModule.full_default(instance, audio, -1);
+        return WhisperModule.full_default(instance, audio, 1);
     }
 
-    async getText(timeout = 5) {
+    async getText(timeout = 30) {
         return new Promise((resolve) => {
             let attempt = 0;
 

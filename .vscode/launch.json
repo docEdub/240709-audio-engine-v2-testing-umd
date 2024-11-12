@@ -5,20 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "https",
+            "name": "Launch server",
+            "type": "node-terminal",
             "request": "launch",
-            "type": "chrome",
-            "runtimeArgs": [
-                // "--auto-open-devtools-for-tabs",
-                // "-incognito",
-                "--test-type" // turns off security warnings
-            ],
-            "url": "https://localhost",
-            "webRoot": "${workspaceFolder}/dist",
-            "sourceMapPathOverrides": {
-                "webpack://*": "${workspaceFolder}/*",
-            },
-            "preLaunchTask": "npm start"
+            "command": "npm start"
         }
     ]
 }

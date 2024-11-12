@@ -1,6 +1,6 @@
 import { defineConfig } from "@playwright/test";
 
-import { populateEnvironment } from "./src/test-tools/utils";
+import { populateEnvironment } from "./src/test-tools/audioTestUtils";
 populateEnvironment();
 
 const args = process.env.PLAYWRIGHT_ARGS ? process.env.PLAYWRIGHT_ARGS.split(" ") : [];
