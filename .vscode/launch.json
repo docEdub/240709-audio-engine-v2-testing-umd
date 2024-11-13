@@ -5,6 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug",
+            "request": "launch",
+            "type": "chrome",
+            "runtimeArgs": [
+                // "--auto-open-devtools-for-tabs",
+                // "-incognito",
+                // "--test-type" // turns off security warnings
+            ],
+            "url": "https://localhost/debug",
+            "preLaunchTask": "npm start",
+            "sourceMapPathOverrides": {
+                "webpack:///./src/*": "${workspaceFolder}/src/*",
+                "webpack://BABYLON/../../../dev/*": "/Users/andy/-/code/3rdparty/Babylon.js/packages/dev/*"
+            }
+        },
+        {
             "name": "Launch server",
             "type": "node-terminal",
             "request": "launch",

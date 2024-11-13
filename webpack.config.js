@@ -9,10 +9,13 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const appDirectory = fs.realpathSync(process.cwd());
 
 module.exports = {
-    entry: path.resolve(appDirectory, "src/test-tools/evaluatedAudioTestUtils.ts"),
+    entry: {
+        evaluatedAudioTestUtils: path.resolve(appDirectory, "src/test-tools/evaluatedAudioTestUtils.ts"),
+        debug: path.resolve(appDirectory, "src/debug.ts"),
+    },
     output: {
         path: path.resolve(appDirectory, "dist"),
-        filename: "js/evaluatedAudioTestUtils.js",
+        filename: "js/[name].js",
     },
     resolve: {
         extensions: [".tsx", ".ts", ".js"],
@@ -30,9 +33,6 @@ module.exports = {
         static: path.resolve(appDirectory, "public"),
     },
     devtool: "inline-source-map",
-    externals: {
-        babylonjs: "BABYLON",
-    },
     module: {
         rules: [
             {
@@ -58,6 +58,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             inject: true,
             template: path.resolve(appDirectory, "public/index.html"),
+        }),
+        new HtmlWebpackPlugin({
+            inject: true,
+            filename: "debug/index.html",
+            template: path.resolve(appDirectory, "public/debug/index.html"),
         }),
         new CleanWebpackPlugin(),
     ],
