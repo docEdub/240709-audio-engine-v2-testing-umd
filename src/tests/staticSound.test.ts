@@ -1,9 +1,9 @@
 import { expect, Page, test } from "@playwright/test";
-import { evaluatePlaywrightAudioTests } from "../test-tools/audioTestUtils";
+import { initPlaywrightAudioTests } from "../test-tools/audioTestUtils";
 
 let page: Page;
 
-evaluatePlaywrightAudioTests((newPage) => {
+initPlaywrightAudioTests((newPage) => {
     page = newPage;
 });
 

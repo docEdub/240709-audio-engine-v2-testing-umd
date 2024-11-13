@@ -2,11 +2,6 @@ import { expect, Page, test, TestInfo } from "@playwright/test";
 import * as dotenv from "dotenv";
 import * as fs from "fs";
 import * as path from "path";
-import type { Test as TestClass } from "../test-tools/evaluatedAudioTestUtils";
-
-declare global {
-    const Test: typeof TestClass;
-}
 
 export function populateEnvironment() {
     dotenv.config({ path: path.resolve(findRootDirectory(), "./.env") });
@@ -31,7 +26,7 @@ export function findRootDirectory(): string {
     return path.resolve(currentRoot);
 }
 
-export const evaluatePlaywrightAudioTests = async (
+export const initPlaywrightAudioTests = async (
     setPageCallback: (page: Page) => void,
     engineType = "webaudio",
     testFileName = "config",
