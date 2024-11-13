@@ -3,6 +3,7 @@ declare global {
 }
 
 const ForceRealtimeAudioContext = true;
+const SilenceRealtimeAudioOutput = true;
 
 export interface ITestOptions {
     channels?: number;
@@ -11,6 +12,13 @@ export interface ITestOptions {
 }
 
 export class Test {
+    static readonly SoundUrlPrefix = "https://amf-ms.github.io/AudioAssets/testing/";
+
+    static readonly Ac3Url = Test.SoundUrlPrefix + "ac3.ac3";
+    static readonly Mp3Url = Test.SoundUrlPrefix + "mp3-enunciated.mp3";
+    static readonly OggUrl = Test.SoundUrlPrefix + "ogg-enunciated.ogg";
+    static readonly ThreeCountMp3Url = Test.SoundUrlPrefix + "3-count.mp3";
+
     static readonly OfflineSampleRate: number = 16000;
 
     static audioContext: AudioContext | OfflineAudioContext | null;
@@ -24,9 +32,6 @@ export class Test {
     static capturedAudio: Array<Float32Array> = [];
     static capturedText: Array<string> = [];
     static duration: number = 0;
-
-    static readonly ThreeCountMp3Url = "https://amf-ms.github.io/AudioAssets/testing/3-count.mp3";
-    static readonly Mp3Url = "https://amf-ms.github.io/AudioAssets/testing/mp3-enunciated.mp3";
 
     static async BeforeAll(): Promise<void> {
         if (Test.whisper === null) {
@@ -65,14 +70,18 @@ export class Test {
             return;
         }
 
+        Test.recorderDestination = new MediaStreamAudioDestinationNode(audioContext);
+        Test.recorder = new MediaRecorder(Test.recorderDestination.stream);
+
         const webAudioEngine = Test.audioEngine as BABYLON.WebAudioEngine;
         const webAudioMainOutput = webAudioEngine.mainOutput as BABYLON.WebAudioMainOutput;
         const nodeToCapture = webAudioMainOutput.webAudioInputNode;
 
-        Test.recorderDestination = new MediaStreamAudioDestinationNode(audioContext);
-        Test.recorder = new MediaRecorder(Test.recorderDestination.stream);
-
         nodeToCapture.connect(Test.recorderDestination);
+
+        if (SilenceRealtimeAudioOutput) {
+            nodeToCapture.disconnect(audioContext.destination);
+        }
 
         Test.recorder.start();
     }
@@ -96,6 +105,10 @@ export class Test {
 
     static async CreateSound(source: BABYLON.StaticSoundSourceType, options: BABYLON.IStaticSoundOptions | null = null): Promise<BABYLON.StaticSound> {
         return BABYLON.CreateSoundAsync("", source, Test.audioEngine!, options);
+    }
+
+    static async CreateSoundBuffer(source: BABYLON.StaticSoundSourceType, options: BABYLON.IStaticSoundOptions | null = null): Promise<BABYLON.StaticSoundBuffer> {
+        return BABYLON.CreateSoundBufferAsync(source, Test.audioEngine!, options);
     }
 
     static async SoundEndedPromise(sound: BABYLON.AbstractSound): Promise<void> {
