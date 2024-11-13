@@ -7,7 +7,7 @@ evaluatePlaywrightAudioTests((newPage) => {
     page = newPage;
 });
 
-test("Create sound with `autoplay` option set 1", async ({}, testInfo) => {
+test("Create sound with `autoplay` option set 1", async () => {
     const result = await page.evaluate(async () => {
         Test.Setup({ duration: 3 });
 
