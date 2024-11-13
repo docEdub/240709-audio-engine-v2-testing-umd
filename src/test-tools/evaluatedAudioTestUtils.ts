@@ -17,6 +17,7 @@ export class Test {
     static readonly Ac3Url = Test.SoundUrlPrefix + "ac3.ac3";
     static readonly Mp3Url = Test.SoundUrlPrefix + "mp3-enunciated.mp3";
     static readonly OggUrl = Test.SoundUrlPrefix + "ogg-enunciated.ogg";
+    static readonly SixtyCountMp3Url = Test.SoundUrlPrefix + "60-count.mp3";
     static readonly ThreeCountMp3Url = Test.SoundUrlPrefix + "3-count.mp3";
 
     static readonly OfflineSampleRate: number = 16000;

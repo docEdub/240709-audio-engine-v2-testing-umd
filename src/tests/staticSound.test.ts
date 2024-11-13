@@ -218,6 +218,40 @@ test("Play sound with `startOffset` parameter set to 1", async () => {
     expect(result).toEqual(["12"]);
 });
 
+test("Create sound with `startOffset` option set to 5 and call `play` on it with `startOffset` parameter set to 1", async () => {
+    const result = await page.evaluate(async () => {
+        Test.Setup({ duration: 2 });
+
+        await Test.CreateAudioEngine();
+        const sound = await Test.CreateSound(Test.SixtyCountMp3Url, { startOffset: 5 });
+
+        sound.play(0, 1);
+        await Test.CallAt(2, () => {
+            sound.stop();
+        });
+
+        return await Test.Results(sound);
+    });
+    expect(result).toEqual(["12"]);
+});
+
+test("Create sound with `startOffset` option set to 1 and call `play` on it with `startOffset` parameter set to 5", async () => {
+    const result = await page.evaluate(async () => {
+        Test.Setup({ duration: 2 });
+
+        await Test.CreateAudioEngine();
+        const sound = await Test.CreateSound(Test.SixtyCountMp3Url, { startOffset: 1 });
+
+        sound.play(0, 5);
+        await Test.CallAt(2, () => {
+            sound.stop();
+        });
+
+        return await Test.Results(sound);
+    });
+    expect(result).toEqual(["56"]);
+});
+
 test("Play sound with `duration` parameter set to 2.2", async () => {
     const result = await page.evaluate(async () => {
         Test.Setup({ duration: 3 });
