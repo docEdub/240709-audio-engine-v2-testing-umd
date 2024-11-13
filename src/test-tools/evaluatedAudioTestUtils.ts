@@ -24,6 +24,10 @@ export class Test {
 
     static readonly OfflineSampleRate: number = 16000;
 
+    static readonly CommonStreamingTestOptions = {
+        requiresRealtimeAudioContext: true,
+    };
+
     static audioContext: AudioContext | OfflineAudioContext | null;
     static audioEngine: BABYLON.AbstractAudioEngine | null = null;
 
@@ -114,8 +118,16 @@ export class Test {
         return BABYLON.CreateSoundBufferAsync(source, Test.audioEngine!, options);
     }
 
+    static async CreateStreamingSound(source: BABYLON.StreamingSoundSourceType, options: BABYLON.IStreamingSoundOptions | null = null): Promise<BABYLON.StreamingSound> {
+        return BABYLON.CreateStreamingSoundAsync("", source, Test.audioEngine!, options);
+    }
+
     static async SoundEndedPromise(sound: BABYLON.AbstractSound): Promise<void> {
         const audioContext = Test.audioContext;
+
+        if (sound.state === BABYLON.SoundState.Stopped) {
+            return;
+        }
 
         return new Promise<void>((resolve) => {
             if (audioContext instanceof OfflineAudioContext) {
@@ -128,6 +140,20 @@ export class Test {
         });
     }
 
+    static Delay(time: number): Promise<void> {
+        const audioContext = Test.audioContext ?? (Test.audioEngine as any)._audioContext;
+        const callTime = audioContext.currentTime;
+
+        return new Promise<void>((resolve) => {
+            (function done() {
+                if (audioContext.currentTime - callTime >= time) {
+                    resolve();
+                } else setTimeout(done, 0);
+            })();
+        });
+    }
+
+    // TODO: Remove this fuction and replace with `Test.Delay` because this function is all over the place timing wise for the streaming sound tests.
     static CallAt(time: number, callback: () => void): void {
         if (Test.audioContext instanceof OfflineAudioContext) {
             Test.audioEngine!.pause(time).then(() => {
