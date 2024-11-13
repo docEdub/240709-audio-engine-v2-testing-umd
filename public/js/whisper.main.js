@@ -4440,8 +4440,8 @@ class Whisper {
         }
     }
 
-    transcribe(audio) {
-        return WhisperModule.full_default(instance, audio, 1);
+    transcribe(audio, workerCount = -1) {
+        return WhisperModule.full_default(instance, audio, workerCount);
     }
 
     async getText(timeout = 30) {

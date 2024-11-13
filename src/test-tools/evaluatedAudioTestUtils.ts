@@ -5,6 +5,8 @@ declare global {
 const ForceRealtimeAudioContext = true;
 const SilenceRealtimeAudioOutput = true;
 
+const WhisperWorkerCount = 2;
+
 export interface ITestOptions {
     channels?: number;
     duration: number;
@@ -191,7 +193,7 @@ export class Test {
             }
 
             Test.capturedAudio.push(audio);
-            Test.whisper.transcribe(audio);
+            Test.whisper.transcribe(audio, WhisperWorkerCount);
 
             // Get speech-to-text output.
             let sttOutput = await Test.whisper.getText(60); // ~ 60 seconds timeout.
