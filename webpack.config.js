@@ -56,11 +56,11 @@ module.exports = {
             ],
         }),
         new HtmlWebpackPlugin({
-            inject: true,
+            inject: false,
             template: path.resolve(appDirectory, "public/index.html"),
         }),
         new HtmlWebpackPlugin({
-            inject: true,
+            inject: false,
             filename: "debug/index.html",
             template: path.resolve(appDirectory, "public/debug/index.html"),
         }),
