@@ -314,7 +314,7 @@ test("Create 2 sounds using same buffer and play them 500 ms apart", async () =>
     expect(result).toEqual(["001122"]);
 });
 
-test("Create sound with sources set to ac3 and mp3 files", async ({ browserName }) => {
+test("Create sound with sources set to ogg and mp3 files", async ({ browserName }) => {
     const result = await page.evaluate(async () => {
         Test.Setup({ duration: 3 });
 
@@ -335,7 +335,7 @@ test("Create sound with sources set to ac3 and mp3 files", async ({ browserName 
     }
 });
 
-test("Create sound with source array set to ac3 and mp3 files, with skipCodecCheck set to true", async ({ browserName }) => {
+test("Create sound with source array set to ogg/ac3 and mp3 files, with skipCodecCheck set to true", async ({ browserName }) => {
     const result = await page.evaluate(
         async ({ browserName }) => {
             Test.Setup({ duration: 3 });
