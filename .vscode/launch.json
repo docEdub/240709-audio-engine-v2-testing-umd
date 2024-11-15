@@ -17,7 +17,7 @@
             "preLaunchTask": "npm start",
             "sourceMapPathOverrides": {
                 "webpack://@babylonjs-audio-testing/root/./src/*": "${workspaceFolder}/src/*",
-                "file:////Users/andy/-/code/microsoft/Babylon.js/packages/dev/*": "/Users/andy/-/code/microsoft/Babylon.js/packages/dev/*"
+                "file:////**/Babylon.js/packages/dev/*": "${workspaceFolder}/../Babylon.js/packages/dev/*"
             }
         },
         {
