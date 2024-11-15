@@ -9,9 +9,9 @@
             "request": "launch",
             "type": "chrome",
             "runtimeArgs": [
-                // "--auto-open-devtools-for-tabs",
-                // "-incognito",
-                // "--test-type" // turns off security warnings
+                // prettier-ignore
+                "--ignore-certificate-errors",
+                "--auto-open-devtools-for-tabs"
             ],
             "url": "https://localhost/debug",
             "preLaunchTask": "npm start",
