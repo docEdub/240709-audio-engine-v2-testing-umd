@@ -152,7 +152,7 @@ export class Test {
             (function done() {
                 if (audioContext.currentTime - callTime >= time) {
                     resolve();
-                } else setTimeout(done, 0);
+                } else setTimeout(done);
             })();
         });
     }
