@@ -33,6 +33,5 @@ for (const browser of browsers) {
 export default defineConfig({
     projects: projects,
     reporter: [["list"]],
-    retries: 3,
     workers: 9,
 });

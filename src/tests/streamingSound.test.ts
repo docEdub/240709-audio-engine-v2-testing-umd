@@ -94,7 +94,6 @@ test("Create sound with `loop` set to true", async () => {
         await Test.Delay(4.2);
         sound.stop();
 
-        debugger;
         return await Test.Results(sound);
     });
     expect(result).toEqual(["0120"]);
