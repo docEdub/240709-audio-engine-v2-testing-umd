@@ -74,7 +74,12 @@ test("Create sound, call `play` on it twice, and call `stop` on it", async () =>
 
         await sound.play();
         await Test.Delay(0.5);
+
+        // TODO: Figure out how to deal with timing difference between chromium and webkit.
+        // This call is near instantaneous on chromium, but not on webkit, probably because chromium reuses the
+        // previous instance's HTMLAudioElement stream?
         await sound.play();
+
         await Test.Delay(0.75);
         sound.stop();
 
