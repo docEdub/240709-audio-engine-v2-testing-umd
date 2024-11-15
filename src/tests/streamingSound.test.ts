@@ -90,7 +90,7 @@ test("Create sound with `loop` set to true", async () => {
         await Test.CreateAudioEngine();
         const sound = await Test.CreateStreamingSound(Test.ThreeCountMp3Url, { loop: true });
 
-        sound.play();
+        await sound.play();
         await Test.Delay(4.2);
         sound.stop();
 
