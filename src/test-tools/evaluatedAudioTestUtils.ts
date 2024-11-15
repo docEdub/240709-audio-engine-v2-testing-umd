@@ -72,6 +72,10 @@ export class Test {
                 : new OfflineAudioContext(options.channels ?? 1, options.duration * Test.OfflineSampleRate, Test.OfflineSampleRate);
     }
 
+    static CurrentTime() {
+        return Test.audioContext!.currentTime;
+    }
+
     static InitRealtimeAudioCapture(audioContext: AudioContext) {
         if (!(audioContext instanceof AudioContext)) {
             return;
