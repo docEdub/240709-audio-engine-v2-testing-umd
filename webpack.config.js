@@ -49,11 +49,7 @@ module.exports = {
     },
     plugins: [
         new CopyWebpackPlugin({
-            patterns: [
-                { from: "node_modules/babylon*/babylon*.js", to: "js/[name].js" },
-                { from: "node_modules/babylon*/babylon*.map", to: "js/[name].map" },
-                path.resolve("public/favicon.png"),
-            ],
+            patterns: [path.resolve("public/favicon.png")],
         }),
         new HtmlWebpackPlugin({
             inject: false,

@@ -6,7 +6,6 @@
     },
     "devDependencies": {
         "@playwright/test": "^1.48.2",
-        "babylonjs": "^7.14.0",
         "clean-webpack-plugin": "^4.0.0",
         "copy-webpack-plugin": "^12.0.2",
         "dotenv": "^16.4.5",
